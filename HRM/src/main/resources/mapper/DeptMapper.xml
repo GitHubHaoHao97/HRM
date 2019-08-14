@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.dao.DeptMapper" >
+  <resultMap id="BaseResultMap" type="com.company.dao.pojo.Dept" >
+    <constructor >
+      <idArg column="dno" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dtype" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dphone" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dfounddate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="superdno" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dno, dname, dtype, dphone, dfounddate, superdno
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dept
+    where dno = #{dno,jdbcType=INTEGER}
+  </select>
+
+  <select id="findAll" resultType="com.company.dao.pojo.Dept">
+    select  <include refid="Base_Column_List"/> from t_dept
+  </select>
+
+  <select id="findByName" resultType="com.company.dao.pojo.Dept">
+    select <include refid="Base_Column_List"/> from t_dept where dname like concat('%',#{dname},'%')
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dept
+    where dno = #{dno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.company.dao.pojo.Dept" >
+    insert into t_dept (dno, dname, dtype, 
+      dphone, dfounddate, superdno
+      )
+    values (#{dno,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{dtype,jdbcType=VARCHAR}, 
+      #{dphone,jdbcType=INTEGER}, #{dfounddate,jdbcType=DATE}, #{superdno,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.company.dao.pojo.Dept" >
+    insert into t_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dno != null" >
+        dno,
+      </if>
+      <if test="dname != null" >
+        dname,
+      </if>
+      <if test="dtype != null" >
+        dtype,
+      </if>
+      <if test="dphone != null" >
+        dphone,
+      </if>
+      <if test="dfounddate != null" >
+        dfounddate,
+      </if>
+      <if test="superdno != null" >
+        superdno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dno != null" >
+        #{dno,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dtype != null" >
+        #{dtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dphone != null" >
+        #{dphone,jdbcType=INTEGER},
+      </if>
+      <if test="dfounddate != null" >
+        #{dfounddate,jdbcType=DATE},
+      </if>
+      <if test="superdno != null" >
+        #{superdno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.company.dao.pojo.Dept" >
+    update t_dept
+    <set >
+      <if test="dname != null" >
+        dname = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="dtype != null" >
+        dtype = #{dtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dphone != null" >
+        dphone = #{dphone,jdbcType=INTEGER},
+      </if>
+      <if test="dfounddate != null" >
+        dfounddate = #{dfounddate,jdbcType=DATE},
+      </if>
+      <if test="superdno != null" >
+        superdno = #{superdno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dno = #{dno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.company.dao.pojo.Dept" >
+    update t_dept
+    set dname = #{dname,jdbcType=VARCHAR},
+      dtype = #{dtype,jdbcType=VARCHAR},
+      dphone = #{dphone,jdbcType=INTEGER},
+      dfounddate = #{dfounddate,jdbcType=DATE},
+      superdno = #{superdno,jdbcType=INTEGER}
+    where dno = #{dno,jdbcType=INTEGER}
+  </update>
+</mapper>

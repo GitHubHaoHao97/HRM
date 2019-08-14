@@ -54,4 +54,14 @@ public class EmpServiceImpl implements EmpService {
     public List<Emp> findDimission(String estate) {
         return empMapper.findDimission(estate);
     }
+
+    @Override
+    public List<Emp> findJno(Integer jno) {
+        return empMapper.findJno(jno);
+    }
+
+    @Override
+    public List<Emp> findDno(Integer dno) {
+        return empMapper.findDno(dno);
+    }
 }

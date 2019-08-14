@@ -37,6 +37,12 @@
   <select id="findDimission" resultType="com.company.dao.pojo.Emp">
     select <include refid="Base_Column_List"/> from t_emp where estate = #{estate}
   </select>
+  <select id="findJno" resultType="com.company.dao.pojo.Emp">
+    select <include refid="Base_Column_List"/> from t_emp where jno = #{jno}
+  </select>
+  <select id="findDno" resultType="com.company.dao.pojo.Emp">
+    select <include refid="Base_Column_List"/> from t_emp where dno = #{dno}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_emp
     where eno = #{eno,jdbcType=INTEGER}

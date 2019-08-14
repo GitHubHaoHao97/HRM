@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.dao.EmpProbationMapper" >
+  <resultMap id="BaseResultMap" type="com.company.dao.pojo.EmpProbation" >
+    <constructor >
+      <idArg column="eno" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="epstartdate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="ependdate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="epstate" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eno, epstartdate, ependdate, epstate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_emp_probation
+    where eno = #{eno,jdbcType=INTEGER}
+  </select>
+    <select id="findAll" resultType="com.company.dao.pojo.EmpProbation">
+      select <include refid="Base_Column_List"/> from t_probation
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_emp_probation
+    where eno = #{eno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.company.dao.pojo.EmpProbation" >
+    insert into t_emp_probation (eno, epstartdate, ependdate, 
+      epstate)
+    values (#{eno,jdbcType=INTEGER}, #{epstartdate,jdbcType=DATE}, #{ependdate,jdbcType=DATE}, 
+      #{epstate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.company.dao.pojo.EmpProbation" >
+    insert into t_emp_probation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eno != null" >
+        eno,
+      </if>
+      <if test="epstartdate != null" >
+        epstartdate,
+      </if>
+      <if test="ependdate != null" >
+        ependdate,
+      </if>
+      <if test="epstate != null" >
+        epstate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eno != null" >
+        #{eno,jdbcType=INTEGER},
+      </if>
+      <if test="epstartdate != null" >
+        #{epstartdate,jdbcType=DATE},
+      </if>
+      <if test="ependdate != null" >
+        #{ependdate,jdbcType=DATE},
+      </if>
+      <if test="epstate != null" >
+        #{epstate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.company.dao.pojo.EmpProbation" >
+    update t_emp_probation
+    <set >
+      <if test="epstartdate != null" >
+        epstartdate = #{epstartdate,jdbcType=DATE},
+      </if>
+      <if test="ependdate != null" >
+        ependdate = #{ependdate,jdbcType=DATE},
+      </if>
+      <if test="epstate != null" >
+        epstate = #{epstate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eno = #{eno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.company.dao.pojo.EmpProbation" >
+    update t_emp_probation
+    set epstartdate = #{epstartdate,jdbcType=DATE},
+      ependdate = #{ependdate,jdbcType=DATE},
+      epstate = #{epstate,jdbcType=VARCHAR}
+    where eno = #{eno,jdbcType=INTEGER}
+  </update>
+</mapper>

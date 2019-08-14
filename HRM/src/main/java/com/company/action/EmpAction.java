@@ -74,4 +74,23 @@ public class EmpAction{
         }
     }
 
+    @RequestMapping("findJno/{jno}")
+    public @ResponseBody RepositoryResult<List<Emp>> findJno(@PathVariable("jno") int jno){
+        List<Emp> emps = empService.findJno(jno);
+        if (emps != null){
+            return new RepositoryResult<List<Emp>>(200,Result.SUCCESS,emps);
+        }else {
+            return new RepositoryResult<List<Emp>>(500,Result.ERROR);
+        }
+    }
+    @RequestMapping("findDno/{dno}")
+    public @ResponseBody RepositoryResult<List<Emp>> findDno(@PathVariable("dno") int dno){
+        List<Emp> emps = empService.findDno(dno);
+        if (emps != null){
+            return new RepositoryResult<List<Emp>>(200,Result.SUCCESS,emps);
+        }else {
+            return new RepositoryResult<List<Emp>>(500,Result.ERROR);
+        }
+    }
+
 }

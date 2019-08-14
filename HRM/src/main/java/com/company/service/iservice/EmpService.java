@@ -51,4 +51,18 @@ public interface EmpService {
      * @return 离职
      */
     List<Emp> findDimission(String estate);
+
+    /**
+     * 查询岗位下员工
+     * @param jno
+     * @return
+     */
+    List<Emp> findJno(Integer jno);
+
+    /**
+     * 查询部门下员工
+     * @param dno
+     * @return
+     */
+    List<Emp> findDno(Integer dno);
 }

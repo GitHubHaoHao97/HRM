@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.dao.EmpDimissionMapper" >
+  <resultMap id="BaseResultMap" type="com.company.dao.pojo.EmpDimission" >
+    <constructor >
+      <idArg column="eno" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="eddate" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="edtype" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="edtalent" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eno, eddate, edtype, edtalent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_emp_dimission
+    where eno = #{eno,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultType="com.company.dao.pojo.EmpDimission">
+    select <include refid="Base_Column_List"/> from  t_emp_dimission
+  </select>
+  <select id="findById" resultType="com.company.dao.pojo.EmpDimission">
+    select <include refid="Base_Column_List"/> from t_emp_dimission where eno=#{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_emp_dimission
+    where eno = #{eno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.company.dao.pojo.EmpDimission" >
+    insert into t_emp_dimission (eno, eddate, edtype, 
+      edtalent)
+    values (#{eno,jdbcType=INTEGER}, #{eddate,jdbcType=DATE}, #{edtype,jdbcType=VARCHAR}, 
+      #{edtalent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.company.dao.pojo.EmpDimission" >
+    insert into t_emp_dimission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eno != null" >
+        eno,
+      </if>
+      <if test="eddate != null" >
+        eddate,
+      </if>
+      <if test="edtype != null" >
+        edtype,
+      </if>
+      <if test="edtalent != null" >
+        edtalent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eno != null" >
+        #{eno,jdbcType=INTEGER},
+      </if>
+      <if test="eddate != null" >
+        #{eddate,jdbcType=DATE},
+      </if>
+      <if test="edtype != null" >
+        #{edtype,jdbcType=VARCHAR},
+      </if>
+      <if test="edtalent != null" >
+        #{edtalent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.company.dao.pojo.EmpDimission" >
+    update t_emp_dimission
+    <set >
+      <if test="eddate != null" >
+        eddate = #{eddate,jdbcType=DATE},
+      </if>
+      <if test="edtype != null" >
+        edtype = #{edtype,jdbcType=VARCHAR},
+      </if>
+      <if test="edtalent != null" >
+        edtalent = #{edtalent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eno = #{eno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.company.dao.pojo.EmpDimission" >
+    update t_emp_dimission
+    set eddate = #{eddate,jdbcType=DATE},
+      edtype = #{edtype,jdbcType=VARCHAR},
+      edtalent = #{edtalent,jdbcType=VARCHAR}
+    where eno = #{eno,jdbcType=INTEGER}
+  </update>
+</mapper>

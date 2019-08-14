@@ -17,26 +17,14 @@ public interface EmpMapper {
 
     int updateByPrimaryKey(Emp record);
 
-    /**
-     * 分页查询员工信息
-     * @param page=1,size=2
-     * @return List<Emp>
-     */
     List<Emp> findAll();
-    /**
-     * 员工姓名查询
-     * @param ename
-     * @return List<Emp>
-     */
+
     List<Emp> findByName(String ename);
 
-    /**
-     * 已离职员工信息查询
-     * @param estate
-     * @return List<Emp>
-     */
     List<Emp> findDimission(String estate);
 
+    List<Emp> findJno(Integer jno);
 
+    List<Emp> findDno(Integer dno);
 
 }
