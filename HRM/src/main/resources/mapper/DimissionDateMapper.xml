@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.dao.DimissionDateMapper">
+    <select id="findDimissionDate" resultType="com.company.dao.pojo.DimissionDate">
+         select d.dname,j.jname,e.ename,e.esex,dd.eddate,dd.edtype from t_emp e
+         left join t_dept d on e.dno=d.dno
+         left join t_job j on e.jno=j.jno
+         left join t_emp_dimission dd on e.eno=dd.eno
+         where dd.eddate between #{begin} and #{end}
+    </select>
+</mapper>
